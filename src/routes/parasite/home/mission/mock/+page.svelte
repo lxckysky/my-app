@@ -1,0 +1,135 @@
+<script lang="ts">
+  import { goto } from '$app/navigation';
+  import NavBar from '$lib/components/NavBar.svelte';
+
+  const mockTests = [
+    {
+      title: "TCASter Mock Exam",
+      url: "https://www.tcaster.net/category/mock-exam/",
+      desc: "ข้อสอบจำลองสอบเข้ามหาวิทยาลัยในไทย"
+    },
+    {
+      title: "Khan Academy SAT Practice",
+      url: "https://www.khanacademy.org/SAT",
+      desc: "ข้อสอบฝึกฝน SAT พร้อมเฉลยละเอียด"
+    },
+    {
+      title: "GAT/PAT Mock Exams - Dek-D",
+      url: "https://www.dek-d.com/education/gat-pat/",
+      desc: "ข้อสอบ GAT/PAT พร้อมเฉลยและวิเคราะห์"
+    },
+    {
+      title: "O-NET Online Test",
+      url: "https://www.trueplookpanya.com/examination/onet",
+      desc: "ข้อสอบ O-NET ออนไลน์ทุกระดับชั้น"
+    }
+  ];
+
+  function goBack() {
+    goto('/parasite/home');
+  }
+</script>
+
+<NavBar currentPage="mock" />
+
+<main class="mock-container">
+  <button class="back-btn" on:click={goBack}>
+    <img src="/icons/back.png" alt="back" />
+    <span>Back</span>
+  </button>
+
+  <div class="header">
+    <h2>Mock Test Center</h2>
+    <p class="subtitle">รวมแหล่งข้อสอบเสมือนจริง เพื่อเตรียมตัวให้พร้อม!</p>
+  </div>
+
+  <div class="mock-list">
+    {#each mockTests as test}
+      <div class="mock-card" on:click={() => window.open(test.url, '_blank')}>
+        <h3>{test.title}</h3>
+        <p>{test.desc}</p>
+      </div>
+    {/each}
+  </div>
+</main>
+
+<style>
+  .mock-container {
+    padding: 6rem 1.5rem 3rem;
+    background: linear-gradient(135deg, #e0f7fa, #f9f9ff);
+    min-height: 100vh;
+    font-family: 'Noto Sans', sans-serif;
+    position: relative;
+  }
+
+  .back-btn {
+    position: absolute;
+    top: 5.5rem;
+    left: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #f4f6fc;
+    border: 1px solid #cbd5e1;
+    border-radius: 999px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    color: #444;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    z-index: 10;
+  }
+
+  .back-btn img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .header h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin: 0.5rem 0;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    color: #555;
+  }
+
+  .mock-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .mock-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s ease;
+  }
+
+  .mock-card:hover {
+    transform: translateY(-5px);
+    background: #f0faff;
+  }
+
+  .mock-card h3 {
+    font-size: 1.05rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+
+  .mock-card p {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 0;
+  }
+</style>
